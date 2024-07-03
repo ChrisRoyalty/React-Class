@@ -1,9 +1,9 @@
-function Button({bgColor, text}) {
+function Button({bgColor, text, onclick}) {
   return (
     <>
-        <button className = {`p-4 ${bgColor} text-white font-bold w-full border-none`} >{text}</button>
+        <button className = {`p-4 ${bgColor} text-white font-bold border-none rounded-md hover:opacity-70`} onClick={onclick}>{text}</button>
     </>
   )
 }
 
-export default Button
+export default Button;
