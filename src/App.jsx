@@ -46,12 +46,12 @@ function App() {
         />
         <Button text={"Search"} bgColor={"bg-blue-500"} />
       </form>
-      <main className="flex justify-center items-center h-screen flex-wrap gap-5">
-        <h1 className="text-4xl">{error}</h1>
+      <h1 className="text-4xl">{error}</h1>
+      <main className="w-[80%] m-auto h-screen grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-5">
         {recipe.map((item, index) => (
           <figure
             key={index}
-            className="w-1/4 h-[50vh] overflow-y-scroll rounded-md p-3 shadow-xl"
+            className="h-[50vh] overflow-y-scroll rounded-md p-3 shadow-xl border"
           >
             <img
               src={item.recipe.image}
