@@ -1,45 +1,70 @@
 import "./App.css";
-import Button from "./Button";
-// import Modal from "./Modal";
 import { useState, useEffect } from "react";
-// import Header from "./Header";
-// import MyHeader from "./MyHeader";
-// import HeaderComponent from "./HeaderComponent";
-// import MenuDisplay from "./MenuDisplay";
+import Button from "./Button";
 function App() {
-  const [products, setProducts] = useState([]);
-  const api = "https://fakestoreapi.com/products";
+  const [recipe, setRecipe] = useState([]);
+  const [query, setQuery] = useState("chicken");
+  const [change, setChange] = useState("");
+  const [error, setError] = useState();
+  const APP_ID = "6d6a83db";
+  const APP_KEY = "2301e231e5cf4dc8ba58fb8966ba46d3";
+
+  const api = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`;
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRecipe = async () => {
       const response = await fetch(api);
-
       const data = await response.json();
-      console.log(data);
-
-      setProducts(data);
+      if (data.hits.length > 0) {
+        setRecipe(data.hits);
+        setError(null);
+        console.log(data);
+      } else {
+        setRecipe([]);
+        setError("No recipe found");
+      }
     };
-    fetchData();
-  }, []);
-
+    fetchRecipe();
+  }, [query]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setQuery(change);
+    setChange("");
+  };
   return (
     <>
-      <h1 className="text-4xl">Products</h1>
+      <form
+        className="flex justify-center items-center my-10"
+        onSubmit={handleSubmit}
+      >
+        <input
+          type="text"
+          placeholder="search for recipe..."
+          className="border-[1px] border-gray-500 p-3 rounded-md"
+          onChange={(e) => setChange(e.target.value)}
+          value={change}
+        />
+        <Button text={"Search"} bgColor={"bg-blue-500"} />
+      </form>
       <main className="flex justify-center items-center h-screen flex-wrap gap-5">
-        {products.map((product, index) => (
+        <h1 className="text-4xl">{error}</h1>
+        {recipe.map((item, index) => (
           <figure
             key={index}
-            className="w-1/4 h-96 border-[1px] border-black/60"
+            className="w-1/4 h-[50vh] overflow-y-scroll rounded-md p-3 shadow-xl"
           >
             <img
-              src={product.image}
-              alt="product image"
-              className="w-full h-60"
+              src={item.recipe.image}
+              alt={`recipe ${index} image`}
+              className="w-full h-1/2 rounded-md shadow-md"
             />
-            <figcaption className="space-y-3 grid justify-items-center">
-              <strong className="text-sm text-center">{product.title}</strong>
-              <br />
-              <strong className="text-sm text-center">{product.price}</strong>
+            <figcaption className="flex flex-col gap-2">
+              <h1 className="text-[18px] font-bold mt-2">
+                Recipe: {item.recipe.label}
+              </h1>
+              <p className="">
+                <strong>Ingredients:</strong> {item.recipe.ingredientLines}
+              </p>
             </figcaption>
           </figure>
         ))}
