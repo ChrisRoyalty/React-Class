@@ -1,7 +1,8 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import BookApp from "./BookApp";
+// import BookApp from "./BookApp";
 // import Button from "./Button";
+import StickyHeader from "./StickyHeader";
 function App() {
   // const [recipe, setRecipe] = useState([]);
   // const [query, setQuery] = useState("chicken");
@@ -71,9 +72,9 @@ function App() {
     //     ))}
     //   </main>
     // </>
-    <div>
-      <BookApp />
-    </div>
+    <main className="w-full h-[200vh]">
+      <StickyHeader />
+    </main>
   );
 }
 
