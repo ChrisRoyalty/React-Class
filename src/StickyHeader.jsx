@@ -32,7 +32,7 @@ function StickyHeader() {
         <a href="">Blog</a>
       </nav>
       <button
-        className={`p-1 borde-[1px] border-white/80 md:hidden block text-2xl `}
+        className={`p-1 border-[1px] border-white/80 md:hidden block text-2xl `}
         onClick={handleToggleMenu}
       >
         <MdMenu />
