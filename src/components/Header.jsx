@@ -8,6 +8,16 @@ function Header() {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact">Contact</NavLink>
+        <NavLink to="/products">
+          <button className="px-5 py-2 rounded-md bg-red-500 text-white">
+            Products
+          </button>
+        </NavLink>
+        <NavLink to="/signup">
+          <button className="px-5 py-2 rounded-md bg-blue-500 text-white">
+            Signup
+          </button>
+        </NavLink>
       </nav>
     </header>
   );
